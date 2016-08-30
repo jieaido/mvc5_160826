@@ -11,7 +11,7 @@ namespace SportsStore.WebUI.Controllers
     public class ProductController : Controller
     {
         private IProductRepository productRepository;
-        private int pagesize = 4;
+        private int pagesize = 6;
         public ProductController(IProductRepository productRepository)
         {
             this.productRepository = productRepository;
@@ -26,7 +26,8 @@ namespace SportsStore.WebUI.Controllers
             {
                 currentPage = page,
                 itemPerPage = pagesize,
-                Totalitem = productRepository.Products.Count(),
+               Totalitem= category ==null? productRepository.Products.Count():productRepository.Products.Count(p => p.Category==category),
+             
                 
                 
             };

@@ -16,8 +16,9 @@ namespace SportsStore.WebUI.Controllers
             this.repository = repository;
         }
 
-        public PartialViewResult Menu()
+        public PartialViewResult Menu(string category=null)
         {
+            ViewBag.selectedCategory = category;
             var categories =
                 from product in repository.Products
                 orderby product.Category
