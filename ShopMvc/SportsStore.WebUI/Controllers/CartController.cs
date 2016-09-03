@@ -66,5 +66,22 @@ namespace SportsStore.WebUI.Controllers
         {
             return View();
         }
+        [HttpPost]
+        public ViewResult CheckOut(Cart cart,ShippingDetails shippingDetails)
+        {
+            if (!cart.Lines.Any())
+            {
+                ModelState.AddModelError("","sorry, you cart is empty!");
+            }
+            if (ModelState.IsValid)
+            {
+                cart.Clear();
+                return View("completed");
+            }
+            else
+            {
+                return View(shippingDetails);
+            }
+        }
     }
 }
