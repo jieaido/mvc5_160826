@@ -43,5 +43,14 @@
     </tfoot>
 </table>
 <div class="text-center">
+
     <a href="@Model.ReturnUrl" class="btn btn-primary">Continue Shopping</a>
+@if (Model.Cart.Lines.Sum(x => x.Quantity) > 0)
+{
+    @Html.ActionLink("Check OUt", "CheckOut", null, new
+{
+    @class = "btn btn-primary"
+})
+}
+    
 </div>
