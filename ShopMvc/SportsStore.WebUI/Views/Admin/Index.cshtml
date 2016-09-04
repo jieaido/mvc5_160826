@@ -1,34 +1,48 @@
-﻿@model IEnumerable<SportsStore.Domain.Entities.Product>
+﻿@model SportsStore.WebUI.Models.ProductCategoryViewModel
 
 @{
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_AdminLayoutPage1.cshtml";
 
 }
-
+@if (TempData["Message"] != null)
+{
+    @Html.Label(@TempData["Message"].ToString(),new
+    {
+        @class="alert alert-success"
+    })
+    
+}
 <h2>Index</h2>
-
+@Html.ActionLink("全部/","Index")
+@foreach (var category in Model.Categorys)
+{
+    @Html.ActionLink(category+"/", "Index",new
+    {
+        category=category
+    })
+}
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Add New Product", "Create","",new {@class="btn btn-primary"});
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            @Html.DisplayName("Name")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Description)
+            @Html.DisplayName("Description")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Price)
+            @Html.DisplayName("Price")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.Category)
+            @Html.DisplayName("Category")
         </th>
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model.Products) {
     <tr>
         <td>
             @Html.DisplayFor(modelItem => item.Name)
@@ -44,7 +58,7 @@
         </td>
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.ProductID }) |
-            @Html.ActionLink("Details", "Details", new { id=item.ProductID }) |
+         
             @Html.ActionLink("Delete", "Delete", new { id=item.ProductID })
         </td>
     </tr>
