@@ -8,6 +8,8 @@ using Ninject;
 using SportsStore.Domain.Abstract;
 using SportsStore.Domain.Concrete;
 using SportsStore.Domain.Entities;
+using SportsStore.WebUI.Infrastructure.Abstract;
+using SportsStore.WebUI.Infrastructure.Concrete;
 
 namespace SportsStore.WebUI.Infrastructure
 {
@@ -32,6 +34,7 @@ namespace SportsStore.WebUI.Infrastructure
                 });
            // kernel.Bind<IProductRepository>().ToConstant(mock.Object);
             kernel.Bind<IProductRepository>().To<EFProductRepository>();
+            kernel.Bind<IAuthProvider>().To<FormsAuthProvider>();
         }
 
         public object GetService(Type serviceType)
